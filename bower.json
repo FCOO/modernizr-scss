@@ -1,0 +1,36 @@
+{
+  "name"		: "modernizr-scss",
+  "version"	: "0.0.0",
+  "homepage": "https://github.com/FCOO/modernizr-scss",
+  "authors": [
+    "Niels Holt nho@fcoo.dk"
+  ],
+  "description": "",
+  "main": [
+    "dist/_modernizr-scss.scss"
+  ],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/FCOO/modernizr-scss.git"
+	},
+
+	"dependencies": {
+	},
+
+	"devDependencies": {
+    "bourbon": "latest"
+  },
+	
+	"license": "MIT",
+
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "es6"
+  ]
+}

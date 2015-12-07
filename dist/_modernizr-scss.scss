@@ -1,0 +1,97 @@
+//***********************************************
+//	_modernizr-scss.scss, 
+//
+//	(c) 2015, FCOO
+//
+//	https://github.com/FCOO/modernizr-scss
+//	https://github.com/FCOO
+//
+//	scss functions to create classes to display/hide elements 
+//	with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
+//
+//************************************************
+@import "../../bourbon/app/assets/stylesheets/bourbon";
+
+/*
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+@mixin sexy-border($color, $width) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+
+*/
+@mixin TEST( $parent: '' ){
+	#{$parent}.test { background-color: red }
+}
+
+/*
+@each $modernizr-test in $modernizr-tests {
+	// Hide/show when test passed
+	html.#{$modernizr-test}{
+		.show-for-#{$modernizr-test},
+		.hide-for-no-#{$modernizr-test}		{ display: inherit !important; }
+		.hide-for-#{$modernizr-test},
+		.show-for-no-#{$modernizr-test}		{ display: none !important; }
+
+		// Specific visibility for tables 
+		table {
+			&.show-for-#{$modernizr-test},
+			&.hide-for-no-#{$modernizr-test} { display: table !important; }
+		}
+		thead {
+			&.show-for-#{$modernizr-test},
+			&.hide-for-no-#{$modernizr-test} { display: table-header-group !important; }
+		}
+		tbody {
+			&.show-for-#{$modernizr-test},
+			&.hide-for-no-#{$modernizr-test} { display: table-row-group !important; }
+		}
+		tr {
+			&.show-for-#{$modernizr-test},
+			&.hide-for-no-#{$modernizr-test} { display: table-row !important; }
+		}
+		td,
+		th {
+			&.show-for-#{$modernizr-test},
+			&.hide-for-no-#{$modernizr-test} { display: table-cell !important; }
+		}
+  }
+
+	// Hide/show when test failed
+	html.no-#{$modernizr-test}{
+		.show-for-no-#{$modernizr-test},
+		.hide-for-#{$modernizr-test}		{ display: inherit !important; }
+		.hide-for-no-#{$modernizr-test},
+		.show-for-#{$modernizr-test}		{ display: none !important; }
+
+		// Specific visibility for tables 
+		table {
+			&.show-for-no-#{$modernizr-test},
+			&.hide-for-#{$modernizr-test} { display: table !important; }
+		}
+		thead {
+			&.show-for-no-#{$modernizr-test},
+			&.hide-for-#{$modernizr-test} { display: table-header-group !important; }
+		}
+		tbody {
+			&.show-for-no-#{$modernizr-test},
+			&.hide-for-#{$modernizr-test} { display: table-row-group !important; }
+		}
+		tr {
+			&.show-for-no-#{$modernizr-test},
+			&.hide-for-#{$modernizr-test} { display: table-row !important; }
+		}
+		td,
+		th {
+			&.show-for-no-#{$modernizr-test},
+			&.hide-for-#{$modernizr-test} { display: table-cell !important; }
+		}
+	}
+
+} //end of @each $modernizr-test in $modernizr-tests {
+*/
