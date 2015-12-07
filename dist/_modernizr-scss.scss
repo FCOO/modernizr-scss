@@ -10,88 +10,88 @@
 //	with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
 //
 //************************************************
-@import "../../bourbon/app/assets/stylesheets/bourbon";
 
-/*
-@for $i from 1 through 3 {
-  .item-#{$i} { width: 2em * $i; }
-}
-@mixin sexy-border($color, $width) {
-  border: {
-    color: $color;
-    width: $width;
-    style: dashed;
-  }
+
+/************************************************
+mixin _table-show
+Internal mixin setting the Specific visibility for tables
+************************************************/
+@mixin _table-show( $class-name ){
+	table { 
+		&.#{$class-name}	{ display: table !important; }
+	}
+	thead {
+		&.#{$class-name}	{ display: table-header-group !important; }
+	}
+	tbody {
+		&.#{$class-name}	{ display: table-row-group !important; }
+	}
+	tr {
+		&.#{$class-name}	{ display: table-row !important; }
+	}
+	td, th {
+		&.#{$class-name}	{ display: table-cell !important; }
+	}
 }
 
-*/
-@mixin TEST( $parent: '' ){
-	#{$parent}.test { background-color: red }
-}
 
-/*
-@each $modernizr-test in $modernizr-tests {
+@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-class: true, $fail-as-default: false ){
+	// class-names for hide/show when test passed/failed
+	$show-for-class		: show-for-#{$modernizr-test};
+	$hide-for-no-class: hide-for-no-#{$modernizr-test};
+	$hide-for-class		: hide-for-#{$modernizr-test};
+	$show-for-no-class: show-for-no-#{$modernizr-test};
+	
 	// Hide/show when test passed
-	html.#{$modernizr-test}{
-		.show-for-#{$modernizr-test},
-		.hide-for-no-#{$modernizr-test}		{ display: inherit !important; }
-		.hide-for-#{$modernizr-test},
-		.show-for-no-#{$modernizr-test}		{ display: none !important; }
+	#{$parent-element-type}.#{$modernizr-test}{
+		.#{$show-for-class}	{ display: inherit	!important; }
+		.#{$hide-for-class}	{ display: none			!important; }
 
+		@if $incl-no-class {
+			.#{$hide-for-no-class}	{ display: inherit	!important; }
+			.#{$show-for-no-class}	{ display: none			!important; }
+		}
+		
 		// Specific visibility for tables 
-		table {
-			&.show-for-#{$modernizr-test},
-			&.hide-for-no-#{$modernizr-test} { display: table !important; }
-		}
-		thead {
-			&.show-for-#{$modernizr-test},
-			&.hide-for-no-#{$modernizr-test} { display: table-header-group !important; }
-		}
-		tbody {
-			&.show-for-#{$modernizr-test},
-			&.hide-for-no-#{$modernizr-test} { display: table-row-group !important; }
-		}
-		tr {
-			&.show-for-#{$modernizr-test},
-			&.hide-for-no-#{$modernizr-test} { display: table-row !important; }
-		}
-		td,
-		th {
-			&.show-for-#{$modernizr-test},
-			&.hide-for-no-#{$modernizr-test} { display: table-cell !important; }
-		}
-  }
-
-	// Hide/show when test failed
-	html.no-#{$modernizr-test}{
-		.show-for-no-#{$modernizr-test},
-		.hide-for-#{$modernizr-test}		{ display: inherit !important; }
-		.hide-for-no-#{$modernizr-test},
-		.show-for-#{$modernizr-test}		{ display: none !important; }
-
-		// Specific visibility for tables 
-		table {
-			&.show-for-no-#{$modernizr-test},
-			&.hide-for-#{$modernizr-test} { display: table !important; }
-		}
-		thead {
-			&.show-for-no-#{$modernizr-test},
-			&.hide-for-#{$modernizr-test} { display: table-header-group !important; }
-		}
-		tbody {
-			&.show-for-no-#{$modernizr-test},
-			&.hide-for-#{$modernizr-test} { display: table-row-group !important; }
-		}
-		tr {
-			&.show-for-no-#{$modernizr-test},
-			&.hide-for-#{$modernizr-test} { display: table-row !important; }
-		}
-		td,
-		th {
-			&.show-for-no-#{$modernizr-test},
-			&.hide-for-#{$modernizr-test} { display: table-cell !important; }
+		@include _table-show( #{$show-for-class} );
+		@if $incl-no-class {
+			@include _table-show( #{$hide-for-no-class} );
 		}
 	}
 
-} //end of @each $modernizr-test in $modernizr-tests {
-*/
+
+	// Hide/show when test failed
+	@if $fail-as-default {
+		.#{$hide-for-class}	{ display: inherit	!important; }
+		.#{$show-for-class}	{ display: none			!important; }
+
+		@if $incl-no-class {
+			.#{$show-for-no-class}	{ display: inherit	!important; }
+			.#{$hide-for-no-class}	{ display: none			!important; }
+		}
+		
+		// Specific visibility for tables 
+		@include _table-show( #{$hide-for-class}	);
+		@if $incl-no-class {
+			@include _table-show( #{$show-for-no-class} );
+		}
+
+	} @else {
+		#{$parent-element-type}.no-#{$modernizr-test}{
+			.#{$hide-for-class}	{ display: inherit	!important; }
+			.#{$show-for-class}	{ display: none			!important; }
+
+			@if $incl-no-class {
+				.#{$show-for-no-class}	{ display: inherit	!important; }
+				.#{$hide-for-no-class}	{ display: none			!important; }
+			}
+		
+			// Specific visibility for tables 
+			@include _table-show( #{$hide-for-class}	);
+			@if $incl-no-class {
+				@include _table-show( #{$show-for-no-class} );
+			}
+		}
+	}
+}
+

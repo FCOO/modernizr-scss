@@ -1,6 +1,6 @@
 {
   "name"		: "modernizr-scss",
-  "version"	: "0.0.0",
+  "version"	: "1.0.0",
   "homepage": "https://github.com/FCOO/modernizr-scss",
   "authors": [
     "Niels Holt nho@fcoo.dk"
@@ -14,12 +14,9 @@
 		"url": "git://github.com/FCOO/modernizr-scss.git"
 	},
 
-	"dependencies": {
-	},
+	"dependencies": {	},
 
-	"devDependencies": {
-    "bourbon": "latest"
-  },
+	"devDependencies": { },
 	
 	"license": "MIT",
 
