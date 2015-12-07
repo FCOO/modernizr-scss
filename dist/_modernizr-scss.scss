@@ -12,10 +12,10 @@
 //************************************************
 
 
-/************************************************
-mixin _table-show
-Internal mixin setting the Specific visibility for tables
-************************************************/
+//************************************************
+//	mixin _table-show
+//	Internal mixin setting the Specific visibility for tables
+//************************************************
 @mixin _table-show( $class-name ){
 	table { 
 		&.#{$class-name}	{ display: table !important; }
