@@ -7,7 +7,7 @@ scss functions to create classes to display/hide elements with class "show-for-(
 
 ## Installation
 ### bower
-`bower install https://github.com/FCOO/modernizr-scss.git --save`
+`bower install https://github.com/FCOO/modernizr-scss.git --save-dev`
 
 ## Usage
 
