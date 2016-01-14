@@ -13,7 +13,7 @@
 
 
 @mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $fail-as-default: false ){
-	@include -show-and-hide-for-modernizr-test( ($modernizr-test, 'TEST2') , ($parent-element-type + '.' + $modernizr-test, '.PARENTTEST2'), ($parent-element-type +'.no-' + $modernizr-test, '.no-TEST'), $incl-no-selector, $fail-as-default );
+	@include -show-and-hide-for-modernizr-test( ($modernizr-test) , ($parent-element-type + '.' + $modernizr-test), ($parent-element-type +'.no-' + $modernizr-test), $incl-no-selector, $fail-as-default );
 }
 
 
