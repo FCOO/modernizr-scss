@@ -69,7 +69,7 @@
 //	If $inside-TEST-passed == true	=> the classes are inside a parent of .TEST (the TEST passed)
 //	If $inside-TEST-passed == false => the classes are inside a parent of .no-TEST (the TEST failed) and the show/hide in reversed 
 //************************************************
-@mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true){
+@mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true, $display-value: inherit){
 	// class-names for hide/show when test passed/failed
 	$show-for-class-list	: -ms-prefix-list( $modernizr-test-list, 'show-for-' );
 	$show-for-selector		: -ms-class-list-to-selector($show-for-class-list);
@@ -86,12 +86,12 @@
 	@if $inside-TEST-passed {	
 
 		// Show and hide when test PASSED
-		#{$show-for-selector}	{ display: inherit	!important; } 
-		#{$hide-for-selector}	{ display: none			!important; }
+		#{$show-for-selector}	{ display: #{$display-value}	!important; } 
+		#{$hide-for-selector}	{ display: none								!important; }
 
 		@if $incl-no-selector {
-			#{$hide-for-no-selector}	{ display: inherit	!important; }
-			#{$show-for-no-selector}	{ display: none			!important; }
+			#{$hide-for-no-selector}	{ display: #{$display-value}	!important; }
+			#{$show-for-no-selector}	{ display: none								!important; }
 		}
 		// Specific visibility for tables 
 		@include -ms-table-show( $show-for-class-list );
@@ -103,12 +103,12 @@
 	@else {
 
 		// Show and hide when test FAILED
-		#{$hide-for-selector}	{ display: inherit	!important; }
-		#{$show-for-selector}	{ display: none			!important; } 
+		#{$hide-for-selector}	{ display: #{$display-value}	!important; }
+		#{$show-for-selector}	{ display: none								!important; } 
 
 		@if $incl-no-selector {
-			#{$show-for-no-selector}	{ display: inherit	!important; }
-			#{$hide-for-no-selector}	{ display: none			!important; }
+			#{$show-for-no-selector}	{ display: #{$display-value}	!important; }
+			#{$hide-for-no-selector}	{ display: none								!important; }
 		}
 		// Specific visibility for tables 
 		@include -ms-table-show( $hide-for-class-list	);
