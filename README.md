@@ -80,7 +80,7 @@ Would include the following scss
 	}
 
 #### Example 3 - $incl-no-class: false
-	@include show-and-hide-for-modernizr-test( my-test, nil, true );
+	@include show-and-hide-for-modernizr-test( my-test, '', false );
 
 Would include the following scss
 
