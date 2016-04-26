@@ -12,8 +12,15 @@
 //************************************************
 
 
-@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $fail-as-default: false ){
-	@include -ms-show-and-hide-for-modernizr-test( ($modernizr-test) , ($parent-element-type + '.' + $modernizr-test), ($parent-element-type +'.no-' + $modernizr-test), $incl-no-selector, $fail-as-default );
+@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $fail-as-default: false, $incl-table-display: true ){
+	@include -ms-show-and-hide-for-modernizr-test( 
+		($modernizr-test) ,																//$modernizr-test-list
+		($parent-element-type + '.' + $modernizr-test),		//$parent-selector-list
+		($parent-element-type +'.no-' + $modernizr-test), //$parent-no-selector-list
+		$incl-no-selector,																//$incl-no-selector: true
+		$fail-as-default,																	//$fail-as-default: false 
+		$incl-table-display																//$incl-table-display: true
+	);
 }
 
 
@@ -69,7 +76,7 @@
 //	If $inside-TEST-passed == true	=> the classes are inside a parent of .TEST (the TEST passed)
 //	If $inside-TEST-passed == false => the classes are inside a parent of .no-TEST (the TEST failed) and the show/hide in reversed 
 //************************************************
-@mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true, $display-value: inherit){
+@mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true, $display-value: inherit, $incl-table-display: true){
 	// class-names for hide/show when test passed/failed
 	$show-for-class-list	: -ms-prefix-list( $modernizr-test-list, 'show-for-' );
 	$show-for-selector		: -ms-class-list-to-selector($show-for-class-list);
@@ -93,10 +100,13 @@
 			#{$hide-for-no-selector}	{ display: #{$display-value}	!important; }
 			#{$show-for-no-selector}	{ display: none								!important; }
 		}
-		// Specific visibility for tables 
-		@include -ms-table-show( $show-for-class-list );
-		@if $incl-no-selector {
-			@include -ms-table-show( $hide-for-no-class-list );
+
+		@if $incl-table-display {
+			// Specific visibility for tables 
+			@include -ms-table-show( $show-for-class-list );
+			@if $incl-no-selector {
+				@include -ms-table-show( $hide-for-no-class-list );
+			}
 		}
 	}
 
@@ -110,10 +120,13 @@
 			#{$show-for-no-selector}	{ display: #{$display-value}	!important; }
 			#{$hide-for-no-selector}	{ display: none								!important; }
 		}
-		// Specific visibility for tables 
-		@include -ms-table-show( $hide-for-class-list	);
-		@if $incl-no-selector {
-			@include -ms-table-show( $show-for-no-class-list );
+
+		@if $incl-table-display {
+			// Specific visibility for tables 
+			@include -ms-table-show( $hide-for-class-list	);
+			@if $incl-no-selector {
+				@include -ms-table-show( $show-for-no-class-list );
+			}
 		}
 	}
 }
@@ -124,20 +137,20 @@
 //	Internal version of show-and-hide-for-modernizr-test 
 //	allowing list of tests and specific parent-selector
 //************************************************
-@mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $fail-as-default: false ){
+@mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $fail-as-default: false, $incl-table-display: true ){
+
 	// Hide/show when test passed
 	#{-ms-class-list-to-selector($parent-selector-list, '')}{
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true);
+		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, nil, $incl-table-display);
 	}
-
 
 	// Hide/show when test failed
 	@if $fail-as-default {
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false);
+		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, nil, $incl-table-display);
 	} 
 	@else {
 		#{-ms-class-list-to-selector($parent-no-selector-list, '')}{
-			@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false);
+			@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, nil, $incl-table-display);
 		}
 	}
 }
