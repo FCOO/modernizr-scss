@@ -100,7 +100,7 @@ Would include the following scss
 	}
 
 #### Example 4 `$fail-as-default: true`
-	@include show-and-hide-for-modernizr-test( my-test, nil, nil, true );
+	@include show-and-hide-for-modernizr-test( my-test, null, null, true );
 
 Would include the following scss
 
@@ -123,7 +123,7 @@ Would include the following scss
 	}
 
 #### Example 5 `$incl-table-display: false`
-	@include show-and-hide-for-modernizr-test( my-test, nil, nil, nil, false );
+	@include show-and-hide-for-modernizr-test( my-test, null, null, null, false );
 
 Would include the following scss
 

@@ -141,16 +141,16 @@
 
 	// Hide/show when test passed
 	#{-ms-class-list-to-selector($parent-selector-list, '')}{
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, nil, $incl-table-display);
+		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, null, $incl-table-display);
 	}
 
 	// Hide/show when test failed
 	@if $fail-as-default {
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, nil, $incl-table-display);
+		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, null, $incl-table-display);
 	} 
 	@else {
 		#{-ms-class-list-to-selector($parent-no-selector-list, '')}{
-			@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, nil, $incl-table-display);
+			@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, null, $incl-table-display);
 		}
 	}
 }
