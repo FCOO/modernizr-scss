@@ -1,0 +1,19 @@
+/*
+
+DEMO.scss for github/fcoo/modernizr-scss
+
+*/
+
+@import "../dist/modernizr-scss";
+
+
+
+@include show-and-hide-for-modernizr-test( 
+	my-class //$modernizr-test
+//	, //$parent-element-type: ''
+//	, //$incl-no-selector: true
+//	, //$fail-as-default: false
+//	, //$incl-table-display: true 
+);
+
+

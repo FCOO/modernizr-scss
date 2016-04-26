@@ -1,0 +1,96 @@
+/*
+
+DEMO.scss for github/fcoo/modernizr-scss
+
+*/
+.my-class .show-for-my-class {
+  display: inherit !important;
+}
+.my-class .hide-for-my-class {
+  display: none								!important;
+}
+.my-class .hide-for-no-my-class {
+  display: inherit !important;
+}
+.my-class .show-for-no-my-class {
+  display: none								!important;
+}
+.my-class table.show-for-my-class {
+  display: table							!important;
+}
+.my-class thead.show-for-my-class {
+  display: table-header-group !important;
+}
+.my-class tbody.show-for-my-class {
+  display: table-row-group		!important;
+}
+.my-class tr.show-for-my-class {
+  display: table-row					!important;
+}
+.my-class td.show-for-my-class,
+.my-class th.show-for-my-class {
+  display: table-cell					!important;
+}
+.my-class table.hide-for-no-my-class {
+  display: table							!important;
+}
+.my-class thead.hide-for-no-my-class {
+  display: table-header-group !important;
+}
+.my-class tbody.hide-for-no-my-class {
+  display: table-row-group		!important;
+}
+.my-class tr.hide-for-no-my-class {
+  display: table-row					!important;
+}
+.my-class td.hide-for-no-my-class,
+.my-class th.hide-for-no-my-class {
+  display: table-cell					!important;
+}
+
+.no-my-class .hide-for-my-class {
+  display: inherit !important;
+}
+.no-my-class .show-for-my-class {
+  display: none								!important;
+}
+.no-my-class .show-for-no-my-class {
+  display: inherit !important;
+}
+.no-my-class .hide-for-no-my-class {
+  display: none								!important;
+}
+.no-my-class table.hide-for-my-class {
+  display: table							!important;
+}
+.no-my-class thead.hide-for-my-class {
+  display: table-header-group !important;
+}
+.no-my-class tbody.hide-for-my-class {
+  display: table-row-group		!important;
+}
+.no-my-class tr.hide-for-my-class {
+  display: table-row					!important;
+}
+.no-my-class td.hide-for-my-class,
+.no-my-class th.hide-for-my-class {
+  display: table-cell					!important;
+}
+.no-my-class table.show-for-no-my-class {
+  display: table							!important;
+}
+.no-my-class thead.show-for-no-my-class {
+  display: table-header-group !important;
+}
+.no-my-class tbody.show-for-no-my-class {
+  display: table-row-group		!important;
+}
+.no-my-class tr.show-for-no-my-class {
+  display: table-row					!important;
+}
+.no-my-class td.show-for-no-my-class,
+.no-my-class th.show-for-no-my-class {
+  display: table-cell					!important;
+}
+
+/*# sourceMappingURL=_demo.css.map */
