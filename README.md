@@ -1,9 +1,13 @@
 # modernizr-scss
 >
+[Modernizr]: https://modernizr.com/
 
 
 ## Description
 scss functions to create classes to display/hide elements with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
+
+It is using the [Modernizr] principle meaning that there must be a parent element (typical the html-element) that ***must*** have the class `TEST` or `no-TEST`
+If no parent element have class `TEST` or `no-TEST` the class e.g. `hide-for-TEST` will have no effect  
 
 ## Installation
 ### bower
@@ -29,27 +33,29 @@ In any scss-file in the `\src` directory include
 
 The mixin insert scss for classes to show or hide element with classes `show-on-TEST` and `hide-on-TEST` and the complementary `show-on-no-TEST` and `hide-on-no-TEST`
 
+**Element that are displayed by its modernizr-class can be hidden by setting `style="display:none"`, but element that are hidden by its modernizr-class *can't* be made visible by setting `style="display:block"`**
+
 #### Example 1 `$modernizr-test: my-test`
 	@include show-and-hide-for-modernizr-test( my-test );
 
 Would include the following scss
 
 	.my-test {
-	  show-for-my-test	{ display: inherit	!important; }
-	  hide-for-my-test	{ display: none		!important; }
+	  show-for-my-test	{ display: inherit;			}
+	  hide-for-my-test	{ display: none	!important; }
 
-	  hide-for-no-my-test	{ display: inherit	!important; }
-	  show-for-no-my-test	{ display: none		!important; }
+	  hide-for-no-my-test	{ display: inherit; 		}
+	  show-for-no-my-test	{ display: none	!important; }
 	  
       //.. and specific visibility for tables 
 	}
 
 	.no-my-test {
-	  show-for-my-test	{ display: none		!important; }
-	  hide-for-my-test	{ display: inherit	!important; }
+	  show-for-my-test	{ display: none	!important; }
+	  hide-for-my-test	{ display: inherit; 		}
 
-	  hide-for-no-my-test	{ display: none		!important; }
-	  show-for-no-my-test	{ display: inherit	!important; }
+	  hide-for-no-my-test	{ display: none	!important; }
+	  show-for-no-my-test	{ display: inherit;			}
 
       //.. and specific visibility for tables 
 	}
@@ -61,21 +67,21 @@ Would include the following scss
 Would include the following scss
 
 	div.my-test {
-	  show-for-my-test	{ display: inherit	!important; }
-	  hide-for-my-test	{ display: none		!important; }
+	  show-for-my-test	{ display: inherit; 		}
+	  hide-for-my-test	{ display: none	!important; }
 
-	  hide-for-no-my-test	{ display: inherit	!important; }
-	  show-for-no-my-test	{ display: none		!important; }
+	  hide-for-no-my-test	{ display: inherit; 		}
+	  show-for-no-my-test	{ display: none	!important; }
 	  
       //.. and specific visibility for tables 
 	}
 
 	div.no-my-test {
-	  show-for-my-test	{ display: none		!important; }
-	  hide-for-my-test	{ display: inherit	!important; }
+	  show-for-my-test	{ display: none	!important; }
+	  hide-for-my-test	{ display: inherit;			}
 
-	  hide-for-no-my-test	{ display: none		!important; }
-	  show-for-no-my-test	{ display: inherit	!important; }
+	  hide-for-no-my-test	{ display: none	!important; }
+	  show-for-no-my-test	{ display: inherit; 		}
 
       //.. and specific visibility for tables 
 	}
@@ -86,15 +92,15 @@ Would include the following scss
 Would include the following scss
 
 	.my-test {
-	  show-for-my-test	{ display: inherit	!important; }
-	  hide-for-my-test	{ display: none		!important; }
+	  show-for-my-test	{ display: inherit;			}
+	  hide-for-my-test	{ display: none	!important; }
   
       //.. and specific visibility for tables 
 	}
 
 	.no-my-test {
-	  show-for-my-test	{ display: none		!important; }
-	  hide-for-my-test	{ display: inherit	!important; }
+	  show-for-my-test	{ display: none	!important; }
+	  hide-for-my-test	{ display: inherit;			}
 
       //.. and specific visibility for tables 
 	}
@@ -104,20 +110,20 @@ Would include the following scss
 
 Would include the following scss
 
-	show-for-my-test	{ display: none		!important; }
-	hide-for-my-test	{ display: inherit	!important; }
+	show-for-my-test	{ display: none	!important; }
+	hide-for-my-test	{ display: inherit;			}
 
-	hide-for-no-my-test	{ display: none		!important; }
-	show-for-no-my-test	{ display: inherit	!important; }
+	hide-for-no-my-test	{ display: none	!important; }
+	show-for-no-my-test	{ display: inherit;			}
 
     //.. and specific visibility for tables 
 
 	.my-test {
-	  show-for-my-test	{ display: inherit	!important; }
-	  hide-for-my-test	{ display: none		!important; }
+	  show-for-my-test	{ display: inherit;			}
+	  hide-for-my-test	{ display: none	!important; }
 
-	  hide-for-no-my-test	{ display: inherit	!important; }
-	  show-for-no-my-test	{ display: none		!important; }
+	  hide-for-no-my-test	{ display: inherit;			}
+	  show-for-no-my-test	{ display: none	!important; }
 	  
       //.. and specific visibility for tables 
 	}
@@ -128,21 +134,21 @@ Would include the following scss
 Would include the following scss
 
 	.my-test {
-	  show-for-my-test	{ display: inherit	!important; }
-	  hide-for-my-test	{ display: none		!important; }
+	  show-for-my-test	{ display: inherit;			}
+	  hide-for-my-test	{ display: none	!important; }
 
-	  hide-for-no-my-test	{ display: inherit	!important; }
-	  show-for-no-my-test	{ display: none		!important; }
+	  hide-for-no-my-test	{ display: inherit;			}
+	  show-for-no-my-test	{ display: none	!important; }
 	  
       //But NO specific visibility for tables 
 	}
 
 	.no-my-test {
-	  show-for-my-test	{ display: none		!important; }
-	  hide-for-my-test	{ display: inherit	!important; }
+	  show-for-my-test	{ display: none	!important; }
+	  hide-for-my-test	{ display: inherit;			}
 
-	  hide-for-no-my-test	{ display: none		!important; }
-	  show-for-no-my-test	{ display: inherit	!important; }
+	  hide-for-no-my-test	{ display: none	!important; }
+	  show-for-no-my-test	{ display: inherit;			}
 
       //But NO specific visibility for tables 
 	}
