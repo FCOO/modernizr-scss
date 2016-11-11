@@ -1,165 +1,163 @@
 //***********************************************
-//	_modernizr-scss.scss, 
+// _modernizr-scss.scss, 
 //
-//	(c) 2015, FCOO
+// (c) 2015, FCOO
 //
-//	https://github.com/FCOO/modernizr-scss
-//	https://github.com/FCOO
+// https://github.com/FCOO/modernizr-scss
+// https://github.com/FCOO
 //
-//	scss mixin and functions to create classes to display/hide elements 
-//	with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
+// scss mixin and functions to create classes to display/hide elements 
+// with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
 //
 //************************************************
 
 
 @mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $display-value: '', $incl-table-display: true ){
-	@include -ms-show-and-hide-for-modernizr-test( 
-		($modernizr-test) ,																//$modernizr-test-list
-		($parent-element-type + '.' + $modernizr-test),		//$parent-selector-list
-		($parent-element-type +'.no-' + $modernizr-test), //$parent-no-selector-list
-		$incl-no-selector,																//$incl-no-selector: true
-		$display-value,																		//$display-value: ''
-		$incl-table-display																//$incl-table-display: true
-	);
+    @include -ms-show-and-hide-for-modernizr-test( 
+        ($modernizr-test) ,                               //$modernizr-test-list
+        ($parent-element-type + '.' + $modernizr-test),   //$parent-selector-list
+        ($parent-element-type +'.no-' + $modernizr-test), //$parent-no-selector-list
+        $incl-no-selector,                                //$incl-no-selector: true
+        $display-value,                                   //$display-value: ''
+        $incl-table-display                               //$incl-table-display: true
+    );
 }
 
 
 //************************************************
-//	-ms-prefix-list
-//	Internal function adding $prefix to all elements in $list
+// -ms-prefix-list
+// Internal function adding $prefix to all elements in $list
 //************************************************
 @function -ms-prefix-list( $list, $prefix: '' ){
-	$result: ();
-	@for $i from 1 through length($list) {
-		$result: append($result, $prefix + nth($list, $i));
-	}
-	@return $result;
+    $result: ();
+    @for $i from 1 through length($list) {
+        $result: append($result, $prefix + nth($list, $i));
+    }
+    @return $result;
 }
 
 //************************************************
-//	-ms-class-list-to-selector
-//	Internal function creating a string of all elements in $class-list with $prefix
+// -ms-class-list-to-selector
+// Internal function creating a string of all elements in $class-list with $prefix
 //************************************************
 @function -ms-class-list-to-selector( $class-list, $prefix: '.' ){
-	$result: '';
-	@if length($class-list) > 0 {
-		@for $i from 1 through length($class-list) {
-			@if $i > 1 {
-				$result: $result + ',';
-			}
-			$result: $result + $prefix + nth($class-list, $i);
-		}
-	}
-	@return $result;
+    $result: '';
+    @if length($class-list) > 0 {
+        @for $i from 1 through length($class-list) {
+            @if $i > 1 {
+                $result: $result + ',';
+            }
+            $result: $result + $prefix + nth($class-list, $i);
+        }
+    }
+    @return $result;
 }
 
 //************************************************
-//	mixin -ms-table-show
-//	Internal mixin setting the specific visibility for tables-elements
+// mixin -ms-table-show
+// Internal mixin setting the specific visibility for tables-elements
 //************************************************
 @mixin -ms-table-show( $class-list ){
-	@for $i from 1 through length($class-list) {
-		$selector: nth($class-list, $i);
-		table.#{$selector}	{ display: table;								} 	
-		thead.#{$selector}	{ display: table-header-group;	}
-		tbody.#{$selector}	{ display: table-row-group;			} 	
-		tr.#{$selector}			{ display: table-row;						} 
-		td.#{$selector}, 
-		th.#{$selector}			{ display: table-cell;					} 
-	}
+    @for $i from 1 through length($class-list) {
+        $selector: nth($class-list, $i);
+        table.#{$selector} { display: table;              }     
+        thead.#{$selector} { display: table-header-group; }
+        tbody.#{$selector} { display: table-row-group;    }     
+        tr.#{$selector}    { display: table-row;          } 
+        td.#{$selector}, 
+        th.#{$selector}    { display: table-cell;         } 
+    }
 }
 
 
 //************************************************
-//	mixin -ms-show-and-hide
-//	Internal mixin setting the show-for-TEST, hide-for-TEST, show-for-no-TEST, and hide-for-no-TEST classes
-//	If $inside-TEST-passed == true	=> the classes are inside a parent of .TEST (the TEST passed)
-//	If $inside-TEST-passed == false => the classes are inside a parent of .no-TEST (the TEST failed) and the show/hide in reversed 
-//	If $display-value == '' => only classes for .TEST hide-for-TEST { display: none !important; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
-//	If $display-value != '' => including classes for .TEST show-for-TEST { display: ...; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
-
-
+// mixin -ms-show-and-hide
+// Internal mixin setting the show-for-TEST, hide-for-TEST, show-for-no-TEST, and hide-for-no-TEST classes
+// If $inside-TEST-passed == true    => the classes are inside a parent of .TEST (the TEST passed)
+// If $inside-TEST-passed == false => the classes are inside a parent of .no-TEST (the TEST failed) and the show/hide in reversed 
+// If $display-value == '' => only classes for .TEST hide-for-TEST { display: none !important; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
+// If $display-value != '' => including classes for .TEST show-for-TEST { display: ...; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
 //************************************************
 @mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true, $display-value: '', $incl-table-display: true){
-	// class-names for hide/show when test passed/failed
-	$show-for-class-list	: -ms-prefix-list( $modernizr-test-list, 'show-for-' );
-	$show-for-selector		: -ms-class-list-to-selector($show-for-class-list);
-	
-	$hide-for-class-list	: -ms-prefix-list( $modernizr-test-list, 'hide-for-' );
-	$hide-for-selector		: -ms-class-list-to-selector($hide-for-class-list);
+    // class-names for hide/show when test passed/failed
+    $show-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'show-for-' );
+    $show-for-selector      : -ms-class-list-to-selector($show-for-class-list);
+    
+    $hide-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'hide-for-' );
+    $hide-for-selector      : -ms-class-list-to-selector($hide-for-class-list);
 
-	$show-for-no-class-list	: -ms-prefix-list( $modernizr-test-list, 'show-for-no-' );
-	$show-for-no-selector		: -ms-class-list-to-selector($show-for-no-class-list);
+    $show-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'show-for-no-' );
+    $show-for-no-selector   : -ms-class-list-to-selector($show-for-no-class-list);
 
-	$hide-for-no-class-list	: -ms-prefix-list( $modernizr-test-list, 'hide-for-no-' );
-	$hide-for-no-selector		: -ms-class-list-to-selector($hide-for-no-class-list);
+    $hide-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'hide-for-no-' );
+    $hide-for-no-selector   : -ms-class-list-to-selector($hide-for-no-class-list);
 
-	$include-display-value	: if($display-value == '', false, true);
-	
-	@if $inside-TEST-passed {	
+    $include-display-value  : if($display-value == '', false, true);
+    
+    @if $inside-TEST-passed {    
 
-		// Show and hide when test PASSED
-		@if $include-display-value {
-			#{$show-for-selector}	{ display: #{$display-value}; } 
-		}
-		#{$hide-for-selector}	{ display: none !important;		}
+        // Show and hide when test PASSED
+        @if $include-display-value {
+            #{$show-for-selector} { display: #{$display-value}; } 
+        }
+        #{$hide-for-selector} { display: none !important; }
 
-		@if $incl-no-selector {
-			@if $include-display-value {
-				#{$hide-for-no-selector}	{ display: #{$display-value};	}
-			}
-			#{$show-for-no-selector}	{ display: none !important;		}
-		}
+        @if $incl-no-selector {
+            @if $include-display-value {
+                #{$hide-for-no-selector} { display: #{$display-value}; }
+            }
+            #{$show-for-no-selector} { display: none !important; }
+        }
 
-		@if $incl-table-display {
-			// Specific visibility for tables 
-			@include -ms-table-show( $show-for-class-list );
-			@if $incl-no-selector {
-				@include -ms-table-show( $hide-for-no-class-list );
-			}
-		}
-	}
+        @if $incl-table-display {
+            // Specific visibility for tables 
+            @include -ms-table-show( $show-for-class-list );
+            @if $incl-no-selector {
+                @include -ms-table-show( $hide-for-no-class-list );
+            }
+        }
+    }
 
-	@else {
+    @else {
 
-		// Show and hide when test FAILED
-		@if $include-display-value {
-			#{$hide-for-selector}	{ display: #{$display-value};	}
-		}
-		#{$show-for-selector}	{ display: none !important;		} 
+        // Show and hide when test FAILED
+        @if $include-display-value {
+            #{$hide-for-selector} { display: #{$display-value}; }
+        }
+        #{$show-for-selector} { display: none !important; } 
 
-		@if $incl-no-selector {
-			@if $include-display-value {
-				#{$show-for-no-selector}	{ display: #{$display-value};	}
-			}
-			#{$hide-for-no-selector}	{ display: none !important;		}
-		}
+        @if $incl-no-selector {
+            @if $include-display-value {
+                #{$show-for-no-selector} { display: #{$display-value}; }
+            }
+            #{$hide-for-no-selector} { display: none !important; }
+        }
 
-		@if $incl-table-display {
-			// Specific visibility for tables 
-			@include -ms-table-show( $hide-for-class-list	);
-			@if $incl-no-selector {
-				@include -ms-table-show( $show-for-no-class-list );
-			}
-		}
-	}
+        @if $incl-table-display {
+            // Specific visibility for tables 
+            @include -ms-table-show( $hide-for-class-list    );
+            @if $incl-no-selector {
+                @include -ms-table-show( $show-for-no-class-list );
+            }
+        }
+    }
 }
 
 
 //************************************************
-//	-ms-show-and-hide-for-modernizr-test
-//	Internal version of show-and-hide-for-modernizr-test 
-//	allowing list of tests and specific parent-selector
+// -ms-show-and-hide-for-modernizr-test
+// Internal version of show-and-hide-for-modernizr-test 
+// allowing list of tests and specific parent-selector
 //************************************************
 @mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $display-value: '', $incl-table-display: true ){
 
-	// Hide/show when test passed
-	#{-ms-class-list-to-selector($parent-selector-list, '')}{
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, $display-value, $incl-table-display);
-	}
+    // Hide/show when test passed
+    #{-ms-class-list-to-selector($parent-selector-list, '')}{
+        @include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, $display-value, $incl-table-display);
+    }
 
-	// Hide/show when test failed
-	#{-ms-class-list-to-selector($parent-no-selector-list, '')}{
-		@include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, $display-value, $incl-table-display);
-	}
+    // Hide/show when test failed
+    #{-ms-class-list-to-selector($parent-no-selector-list, '')}{
+        @include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, $display-value, $incl-table-display);
+    }
 }

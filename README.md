@@ -161,6 +161,6 @@ Copyright (c) 2015 [FCOO](https://github.com/FCOO)
 
 ## Contact information
 
-[Niels Holt](http://github.com/NielsHolt]
+[Niels Holt](http://github.com/NielsHolt)
 
 
