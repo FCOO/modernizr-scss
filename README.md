@@ -26,7 +26,7 @@ In any scss-file in the `\src` directory include
 		$modernizr-test , 
 		$parent-element-type: '', 
 		$incl-no-selector: true, 
-		$fail-as-default: false,
+		$display-value: '',
 		$incl-table-display: true 
 	)
 
@@ -105,30 +105,7 @@ Would include the following scss
       //.. and specific visibility for tables 
 	}
 
-#### Example 4 `$fail-as-default: true`
-	@include show-and-hide-for-modernizr-test( my-test, null, null, true );
-
-Would include the following scss
-
-	show-for-my-test	{ display: none	!important; }
-	hide-for-my-test	{ display: inherit;			}
-
-	hide-for-no-my-test	{ display: none	!important; }
-	show-for-no-my-test	{ display: inherit;			}
-
-    //.. and specific visibility for tables 
-
-	.my-test {
-	  show-for-my-test	{ display: inherit;			}
-	  hide-for-my-test	{ display: none	!important; }
-
-	  hide-for-no-my-test	{ display: inherit;			}
-	  show-for-no-my-test	{ display: none	!important; }
-	  
-      //.. and specific visibility for tables 
-	}
-
-#### Example 5 `$incl-table-display: false`
+#### Example 4 `$incl-table-display: false`
 	@include show-and-hide-for-modernizr-test( my-test, null, null, null, false );
 
 Would include the following scss
