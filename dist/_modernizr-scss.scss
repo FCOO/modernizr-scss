@@ -12,15 +12,16 @@
 //************************************************
 
 
-@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false ){
+@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false, $postfix:'' ){
     @include -ms-show-and-hide-for-modernizr-test(
-        ($modernizr-test) ,                               //$modernizr-test-list
-        ($parent-element-type + '.' + $modernizr-test),   //$parent-selector-list
-        ($parent-element-type +'.no-' + $modernizr-test), //$parent-no-selector-list
-        $incl-no-selector,                                //$incl-no-selector: true
-        $display-value,                                   //$display-value: ''
-        $incl-table-display,                              //$incl-table-display: true
-        $only-direct-children                             //$only-direct-children: false
+        $modernizr-test-list    : $modernizr-test,
+        $parent-selector-list   : $parent-element-type + '.' + $modernizr-test,
+        $parent-no-selector-list: $parent-element-type +'.no-' + $modernizr-test,
+        $incl-no-selector       : $incl-no-selector,
+        $display-value          : $display-value,
+        $incl-table-display     : $incl-table-display,
+        $only-direct-children   : $only-direct-children,
+        $postfix                : $postfix
     );
 }
 
@@ -41,14 +42,14 @@
 // -ms-class-list-to-selector
 // Internal function creating a string of all elements in $class-list with $prefix
 //************************************************
-@function -ms-class-list-to-selector( $class-list, $prefix: '.' ){
+@function -ms-class-list-to-selector( $class-list, $prefix: '.', $postfix: '' ){
     $result: '';
     @if length($class-list) > 0 {
         @for $i from 1 through length($class-list) {
             @if $i > 1 {
                 $result: $result + ',';
             }
-            $result: $result + $prefix + nth($class-list, $i);
+            $result: $result + $prefix + nth($class-list, $i) + $postfix;
         }
     }
     @return $result;
@@ -153,15 +154,29 @@
 // Internal version of show-and-hide-for-modernizr-test
 // allowing list of tests and specific parent-selector
 //************************************************
-@mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false ){
+@mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false, $postfix: '' ){
 
     // Hide/show when test passed
-    #{-ms-class-list-to-selector($parent-selector-list, '')}{
-        @include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, true, $display-value, $incl-table-display, $only-direct-children);
+    #{-ms-class-list-to-selector($parent-selector-list, '', $postfix)}{
+        @include -ms-show-and-hide(
+            $modernizr-test-list : $modernizr-test-list,
+            $incl-no-selector    : $incl-no-selector,
+            $inside-TEST-passed  : true,
+            $display-value       : $display-value,
+            $incl-table-display  : $incl-table-display,
+            $only-direct-children: $only-direct-children
+        );
     }
 
     // Hide/show when test failed
-    #{-ms-class-list-to-selector($parent-no-selector-list, '')}{
-        @include -ms-show-and-hide( $modernizr-test-list, $incl-no-selector, false, $display-value, $incl-table-display, $only-direct-children);
+    #{-ms-class-list-to-selector($parent-no-selector-list, '', $postfix)}{
+        @include -ms-show-and-hide(
+            $modernizr-test-list : $modernizr-test-list,
+            $incl-no-selector    : $incl-no-selector,
+            $inside-TEST-passed  : false,
+            $display-value       : $display-value,
+            $incl-table-display  : $incl-table-display,
+            $only-direct-children: $only-direct-children
+        );
     }
 }
