@@ -9,16 +9,35 @@
 // scss mixin and functions to create classes to display/hide elements
 // with class "show-for-(no-)[TEST]" / "hide-for-(no-)[TEST]"
 //
+//Note: The order of parameters must be preserved!
 //************************************************
 
 
-@mixin show-and-hide-for-modernizr-test( $modernizr-test , $parent-element-type: '', $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false, $postfix:'' ){
+@mixin show-and-hide-for-modernizr-test(
+    $modernizr-test,
+    $parent-element-type : '',
+    $incl-no-selector    : true,
+    $display-value       : '',
+    $incl-table-display  : true,
+    $only-direct-children: false,
+    $postfix             : '',
+
+    $no-display-value    : 'none',
+    $display-attr        : 'display'
+
+
+
+){
     @include -ms-show-and-hide-for-modernizr-test(
         $modernizr-test-list    : $modernizr-test,
         $parent-selector-list   : $parent-element-type + '.' + $modernizr-test,
         $parent-no-selector-list: $parent-element-type +'.no-' + $modernizr-test,
         $incl-no-selector       : $incl-no-selector,
+
+        $display-attr           : $display-attr,
         $display-value          : $display-value,
+        $no-display-value       : $no-display-value,
+
         $incl-table-display     : $incl-table-display,
         $only-direct-children   : $only-direct-children,
         $postfix                : $postfix
@@ -79,8 +98,22 @@
 // If $inside-TEST-passed == false => the classes are inside a parent of .no-TEST (the TEST failed) and the show/hide in reversed
 // If $display-value == '' => only classes for .TEST hide-for-TEST { display: none !important; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
 // If $display-value != '' => including classes for .TEST show-for-TEST { display: ...; } (and similar combonations of .no-TEST / .TEST and show/hide-for[-no]-TEST)
+//
+//Note: The order of parameters must be preserved!
 //************************************************
-@mixin -ms-show-and-hide( $modernizr-test-list, $incl-no-selector: true, $inside-TEST-passed: true, $display-value: '', $incl-table-display: true, $only-direct-children: false){
+@mixin -ms-show-and-hide(
+    $modernizr-test-list,
+    $incl-no-selector       : true,
+    $inside-TEST-passed     : true,
+    $display-value          : '',
+    $incl-table-display     : true,
+    $only-direct-children   : false,
+
+    $no-display-value       : 'none',
+    $display-attr           : 'display'
+
+
+){
     //If $only-for-children is set => prefix with ">"
     $prefix: if($only-direct-children == true, "> .", ".");
 
@@ -103,15 +136,15 @@
 
         // Show and hide when test PASSED
         @if $include-display-value {
-            #{$show-for-selector} { display: #{$display-value}; }
+            #{$show-for-selector} { #{$display-attr}: #{$display-value}; }
         }
-        #{$hide-for-selector} { display: none !important; }
+        #{$hide-for-selector} { #{$display-attr}: #{$no-display-value} !important; }
 
         @if $incl-no-selector {
             @if $include-display-value {
-                #{$hide-for-no-selector} { display: #{$display-value}; }
+                #{$hide-for-no-selector} { #{$display-attr}: #{$display-value}; }
             }
-            #{$show-for-no-selector} { display: none !important; }
+            #{$show-for-no-selector} { #{$display-attr}: #{$no-display-value} !important; }
         }
 
         @if $incl-table-display {
@@ -127,15 +160,15 @@
 
         // Show and hide when test FAILED
         @if $include-display-value {
-            #{$hide-for-selector} { display: #{$display-value}; }
+            #{$hide-for-selector} { #{$display-attr}: #{$display-value}; }
         }
-        #{$show-for-selector} { display: none !important; }
+        #{$show-for-selector} { #{$display-attr}: #{$no-display-value} !important; }
 
         @if $incl-no-selector {
             @if $include-display-value {
-                #{$show-for-no-selector} { display: #{$display-value}; }
+                #{$show-for-no-selector} { #{$display-attr}: #{$display-value}; }
             }
-            #{$hide-for-no-selector} { display: none !important; }
+            #{$hide-for-no-selector} { #{$display-attr}: #{$no-display-value} !important; }
         }
 
         @if $incl-table-display {
@@ -154,7 +187,20 @@
 // Internal version of show-and-hide-for-modernizr-test
 // allowing list of tests and specific parent-selector
 //************************************************
-@mixin -ms-show-and-hide-for-modernizr-test( $modernizr-test-list , $parent-selector-list, $parent-no-selector-list, $incl-no-selector: true, $display-value: '', $incl-table-display: true, $only-direct-children: false, $postfix: '' ){
+@mixin -ms-show-and-hide-for-modernizr-test(
+    $modernizr-test-list ,
+    $parent-selector-list,
+    $parent-no-selector-list,
+    $incl-no-selector       : true,
+    $display-attr           : 'display',
+    $display-value          : '',
+    $no-display-value       : 'none',
+
+
+    $incl-table-display     : true,
+    $only-direct-children   : false,
+    $postfix                : ''
+){
 
     // Hide/show when test passed
     #{-ms-class-list-to-selector($parent-selector-list, '', $postfix)}{
@@ -164,7 +210,9 @@
             $inside-TEST-passed  : true,
             $display-value       : $display-value,
             $incl-table-display  : $incl-table-display,
-            $only-direct-children: $only-direct-children
+            $only-direct-children: $only-direct-children,
+            $no-display-value    : $no-display-value,
+            $display-attr        : $display-attr
         );
     }
 
@@ -176,7 +224,9 @@
             $inside-TEST-passed  : false,
             $display-value       : $display-value,
             $incl-table-display  : $incl-table-display,
-            $only-direct-children: $only-direct-children
+            $only-direct-children: $only-direct-children,
+            $no-display-value    : $no-display-value,
+            $display-attr        : $display-attr
         );
     }
 }
