@@ -23,7 +23,9 @@
     $postfix             : '',
 
     $no-display-value    : 'none',
-    $display-attr        : 'display'
+    $display-attr        : 'display',
+
+    $class-postfix       : ''
 
 
 
@@ -40,7 +42,8 @@
 
         $incl-table-display     : $incl-table-display,
         $only-direct-children   : $only-direct-children,
-        $postfix                : $postfix
+        $postfix                : $postfix,
+        $class-postfix          : $class-postfix
     );
 }
 
@@ -49,10 +52,10 @@
 // -ms-prefix-list
 // Internal function adding $prefix to all elements in $list
 //************************************************
-@function -ms-prefix-list( $list, $prefix: '' ){
+@function -ms-prefix-list( $list, $prefix: '', $postfix: '' ){
     $result: ();
     @for $i from 1 through length($list) {
-        $result: append($result, $prefix + nth($list, $i));
+        $result: append($result, $prefix + nth($list, $i) + $postfix);
     }
     @return $result;
 }
@@ -110,7 +113,9 @@
     $only-direct-children   : false,
 
     $no-display-value       : 'none',
-    $display-attr           : 'display'
+    $display-attr           : 'display',
+
+    $class-postfix          : ''
 
 
 ){
@@ -118,16 +123,16 @@
     $prefix: if($only-direct-children == true, "> .", ".");
 
     // class-names for hide/show when test passed/failed
-    $show-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'show-for-' );
+    $show-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'show-for-', $class-postfix );
     $show-for-selector      : -ms-class-list-to-selector($show-for-class-list, $prefix);
 
-    $hide-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'hide-for-' );
+    $hide-for-class-list    : -ms-prefix-list( $modernizr-test-list, 'hide-for-', $class-postfix );
     $hide-for-selector      : -ms-class-list-to-selector($hide-for-class-list, $prefix);
 
-    $show-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'show-for-no-' );
+    $show-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'show-for-no-', $class-postfix );
     $show-for-no-selector   : -ms-class-list-to-selector($show-for-no-class-list, $prefix);
 
-    $hide-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'hide-for-no-' );
+    $hide-for-no-class-list : -ms-prefix-list( $modernizr-test-list, 'hide-for-no-', $class-postfix );
     $hide-for-no-selector   : -ms-class-list-to-selector($hide-for-no-class-list, $prefix);
 
     $include-display-value  : if($display-value == '', false, true);
@@ -199,7 +204,9 @@
 
     $incl-table-display     : true,
     $only-direct-children   : false,
-    $postfix                : ''
+    $postfix                : '',
+
+    $class-postfix          : ''
 ){
 
     // Hide/show when test passed
@@ -212,7 +219,8 @@
             $incl-table-display  : $incl-table-display,
             $only-direct-children: $only-direct-children,
             $no-display-value    : $no-display-value,
-            $display-attr        : $display-attr
+            $display-attr        : $display-attr,
+            $class-postfix       : $class-postfix
         );
     }
 
@@ -226,7 +234,8 @@
             $incl-table-display  : $incl-table-display,
             $only-direct-children: $only-direct-children,
             $no-display-value    : $no-display-value,
-            $display-attr        : $display-attr
+            $display-attr        : $display-attr,
+            $class-postfix       : $class-postfix
         );
     }
 }
